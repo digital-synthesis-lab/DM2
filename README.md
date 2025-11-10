@@ -2,22 +2,23 @@
 
 This repo is mainly adopted from [LLNL/graphite](https://github.com/LLNL/graphite/) (version Dec 12, 2023).
 
-DM2/
-├── demo/                               # Example scripts for generation and training
-│   ├── gen_data/                       
-│   ├── inital_data/                    # Initial random structure data (e.g., SiO₂)
-│   │   ├── random_sio2_size_300_data/
-│   │   └── random_sio2_size_3000_data/
-│   ├── denoise_generate_demo.py        # Unconditional training example
-│   ├── denoise_train_conditional.py    # Conditional training example
-│   └── denoiser_train.py               # Conditional model training script
-│
-├── model/                              # Pretrained diffusion models
-│   ├── gen-a-sio2-cond-v1.pt           # Conditional SiO₂ generator
-│   ├── gen-a-sio2-v1                   # Unconditional SiO₂ generator
-│   └── gen-cu50zr50-v1.pt              # Cu–Zr metallic glass generator
-│
-├── src/                          
+**📂 Directory Overview**
+- **demo/** — Example scripts for generation and training  
+  - `gen_data/` — Input data generation utilities  
+  - `inital_data/` — Initial random structures (e.g., SiO₂)  
+    - `random_sio2_size_300_data/`  
+    - `random_sio2_size_3000_data/`  
+  - `denoise_generate_demo.py` — Unconditional generation example  
+  - `denoise_train_conditional.py` — Conditional training example  
+  - `denoiser_train.py` — Unconditional training example  
+
+- **model/** — Pretrained diffusion models  
+  - `gen-a-sio2-cond-v1.pt` — Conditional SiO₂ generator  
+  - `gen-a-sio2-v1` — Unconditional SiO₂ generator  
+  - `gen-cu50zr50-v1.pt` — Cu–Zr metallic glass generator  
+
+- **src/** — Core source code and utilities  
+                    
 
 ## 🧪 Demo: Generating Amorphous SiO₂
 
