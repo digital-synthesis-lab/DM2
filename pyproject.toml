@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dm2"
+version = "0.1.0"
+description = "Diffusion Models for Materials (DM2): Generative framework for amorphous materials."
+readme = "README.md"
+
+authors = [
+    { name = "Kai Yang", email = "kyang42@ucla.edu" },
+    { name = "Daniel Schwalbe-Koda", email = "dskoda@ucla.edu" }
+]
+
+license = { text = "MIT" }
+requires-python = ">=3.8"
+
+dependencies = [
+    "torch>=2.0",
+    "numpy",
+    "scipy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "ase",
+    "e3nn==0.4.4"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/digital-synthesis-lab/DM2"
+
+[tool.setuptools.packages.find]
+where = ["src"]
