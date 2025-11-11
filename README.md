@@ -67,3 +67,26 @@ To uninstall:
 ```bash
 pip uninstall graphite
 ```
+
+## Citing
+
+If using this code, please cite the following papers:
+
+```
+@article{yang2025generative,
+  title={A generative diffusion model for amorphous materials},
+  author={Yang, Kai and Schwalbe-Koda, Daniel},
+  journal={arXiv:2507.05024},
+  year={2025}
+}
+
+@article{hsu2024score,
+  title={Score-based denoising for atomic structure identification},
+  author={Hsu, Tim and Sadigh, Babak and Bertin, Nicolas and Park, Cheol Woo and Chapman, James and Bulatov, Vasily and Zhou, Fei},
+  journal={npj Computational Materials},
+  volume={10},
+  number={1},
+  pages={155},
+  year={2024},
+}
+```
