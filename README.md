@@ -1,24 +1,26 @@
 ## DM2: diffusion models for disordered materials
 
-This repo is mainly adopted from [LLNL/graphite](https://github.com/LLNL/graphite/) (version Dec 12, 2023).
+This repo is mainly adapted from [LLNL/graphite](https://github.com/LLNL/graphite/) (version Dec 12, 2023).
+Modifications to the original code from [Tim Hsu](https://github.com/tim-hsu) were made to include an embedding for the processing conditions of the glassy materials, and integrate the generation with the simulation of amorphous structures.
+This code is provided as a separate snapshot to ensure reproducibility of [our manuscript](https://arxiv.org/abs/2507.05024), but considering that the credits for the original `graphite` code belong to Hsu.
 
 **📂 Directory Overview**
-- **demo/** — Example scripts for generation and training  
-  - `gen_data/` — Input data generation utilities  
-  - `inital_data/` — Initial random structures (e.g., SiO₂)  
-    - `random_sio2_size_300_data/`  
-    - `random_sio2_size_3000_data/`  
-  - `denoise_generate_demo.py` — Unconditional generation example  
-  - `denoise_train_conditional.py` — Conditional training example  
-  - `denoiser_train.py` — Unconditional training example  
+- **demo/** — Example scripts for generation and training
+  - `gen_data/` — Input data generation utilities
+  - `inital_data/` — Initial random structures (e.g., SiO₂)
+    - `random_sio2_size_300_data/`
+    - `random_sio2_size_3000_data/`
+  - `denoise_generate_demo.py` — Unconditional generation example
+  - `denoise_train_conditional.py` — Conditional training example
+  - `denoiser_train.py` — Unconditional training example
 
-- **model/** — Pretrained diffusion models  
-  - `gen-a-sio2-cond-v1.pt` — Conditional SiO₂ generator  
-  - `gen-a-sio2-v1` — Unconditional SiO₂ generator  
-  - `gen-cu50zr50-v1.pt` — Cu–Zr metallic glass generator  
+- **model/** — Pretrained diffusion models
+  - `gen-a-sio2-cond-v1.pt` — Conditional SiO₂ generator
+  - `gen-a-sio2-v1` — Unconditional SiO₂ generator
+  - `gen-cu50zr50-v1.pt` — Cu–Zr metallic glass generator
 
-- **src/** — Core source code and utilities  
-                    
+- **src/** — Core source code and utilities
+
 
 ## 🧪 Demo: Generating Amorphous SiO₂
 
@@ -50,18 +52,18 @@ pip install torch_geometric
 pip install torch_scatter torch_cluster -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
 ```
 
-Install e3nn with specific version.  
+Install e3nn with specific version.
 The latest version of e3nn may cause some error.
 ```bash
 pip install "e3nn==0.4.4"
 ```
 
-Then, clone the repo and install ```dm2```  
+Then, clone the repo and install ```dm2```
 ```bash
 pip install -e /path/to/the/repo
 ```
 
-To uninstall: 
+To uninstall:
 ```bash
 pip uninstall graphite
 ```
