@@ -4,6 +4,18 @@ This repo is mainly adapted from [LLNL/graphite](https://github.com/LLNL/graphit
 Modifications to the original code from [Tim Hsu](https://github.com/tim-hsu) were made to include an embedding for the processing conditions of the glassy materials, and integrate the generation with the simulation of amorphous structures.
 This code is provided as a separate snapshot to ensure reproducibility of [our manuscript](https://arxiv.org/abs/2507.05024), but considering that the credits for the original `graphite` code belong to Hsu.
 
+**📂 Gallery**
+
+### Generation of cubic a-SiO₂ (slice view)
+![](/media/gifs/a-sio2-cube.gif)
+
+### Generation of amorphous mesoporous SiO₂ (slice view)
+![](/media/gifs/a-sio2-pore.gif)
+
+### Generation of cubic Cu<sub>2</sub>Zr<sub>2</sub> (slice view)
+![](/media/gifs/a-sio2-pore.gif)
+
+
 **📂 Directory Overview**
 - **demo/** — Example scripts for generation and training
   - `gen_data/` — Input data generation utilities
