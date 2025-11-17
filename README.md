@@ -1,4 +1,4 @@
-## <img src="media/DM2_logo.png" alt="alt text" width="60"> DM2: diffusion models for disordered materials
+## <img src="media/DM2_logo.png" alt="alt text" width="60"> DM<sup>2</sup>: Diffusion Models for Disordered Materials
 
 This repo is mainly adapted from [LLNL/graphite](https://github.com/LLNL/graphite/) (version Dec 12, 2023).
 Modifications to the original code from [Tim Hsu](https://github.com/tim-hsu) were made to include an embedding for the processing conditions of the glassy materials, and integrate the generation with the simulation of amorphous structures.
@@ -6,24 +6,24 @@ This code is provided as a separate snapshot to ensure reproducibility of [our m
 
 # 📂 Gallery
 
-### Generation of cubic a-SiO₂ 
+### Generation of cubic a-SiO<sub>2</sub> 
 <p align="center">
-  <img src="./media/gifs/a-sio2-cube.gif" width="50%">
+  <img src="./media/gifs/a-sio2-cube.gif" width="30%">
 </p>
 
-### Generation of cubic a-SiO₂ (slice view)
+### Generation of cubic a-SiO<sub>2</sub> (slice view)
 <p align="center">
-  <img src="./media/gifs/a-sio2-denoiser_200ppi.gif" width="50%">
+  <img src="./media/gifs/a-sio2-denoiser_200ppi.gif" width="30%">
 </p>
 
-### Generation of amorphous mesoporous SiO₂ (slice view)
+### Generation of amorphous mesoporous SiO<sub>2</sub> (slice view)
 <p align="center">
-  <img src="./media/gifs/a-sio2-pore.gif" width="50%">
+  <img src="./media/gifs/a-sio2-pore.gif" width="30%">
 </p>
 
-### Generation of cubic Cu<sub>2</sub>Zr<sub>2</sub> (slice view)
+### Generation of cubic Cu<sub>50</sub>Zr<sub>50</sub> (slice view)
 <p align="center">
-  <img src="./media/gifs/cuzr_gen.gif" width="50%">
+  <img src="./media/gifs/cuzr_gen.gif" width="30%">
 </p>
 
 
@@ -49,11 +49,11 @@ This code is provided as a separate snapshot to ensure reproducibility of [our m
 
 A demo script is provided at
 ```~/demo/denoise_generate_demo.py```
-for generating amorphous SiO₂ structures using the trained  model.
+for generating amorphous SiO<sub>2</sub> structures using the trained  model.
 
 Before running the demo, you may need to make minor adjustments (changing GPU ID or updating relevant file paths). Once configured, simply execute the script to reproduce the sample generation results.
 
-The demo generating 300-atom a-SiO₂ took about 1.5 mins on NVIDIA RTX A6000.
+The demo generating 300-atom a-SiO<sub>2</sub> took about 1.5 mins on NVIDIA RTX A6000.
 
 # ⚙️ Installation
 
