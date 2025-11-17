@@ -1,22 +1,33 @@
-## DM2: diffusion models for disordered materials
+## <img src="media/DM2_logo.png" alt="alt text" width="60"> DM2: diffusion models for disordered materials
 
 This repo is mainly adapted from [LLNL/graphite](https://github.com/LLNL/graphite/) (version Dec 12, 2023).
 Modifications to the original code from [Tim Hsu](https://github.com/tim-hsu) were made to include an embedding for the processing conditions of the glassy materials, and integrate the generation with the simulation of amorphous structures.
 This code is provided as a separate snapshot to ensure reproducibility of [our manuscript](https://arxiv.org/abs/2507.05024), but considering that the credits for the original `graphite` code belong to Hsu.
 
-**📂 Gallery**
+# 📂 Gallery
+
+### Generation of cubic a-SiO₂ 
+<p align="center">
+  <img src="./media/gifs/a-sio2-cube.gif" width="50%">
+</p>
 
 ### Generation of cubic a-SiO₂ (slice view)
-![](/media/gifs/a-sio2-cube.gif)
+<p align="center">
+  <img src="./media/gifs/a-sio2-denoiser_200ppi.gif" width="50%">
+</p>
 
 ### Generation of amorphous mesoporous SiO₂ (slice view)
-![](/media/gifs/a-sio2-pore.gif)
+<p align="center">
+  <img src="./media/gifs/a-sio2-pore.gif" width="50%">
+</p>
 
 ### Generation of cubic Cu<sub>2</sub>Zr<sub>2</sub> (slice view)
-![](/media/gifs/a-sio2-pore.gif)
+<p align="center">
+  <img src="./media/gifs/cuzr_gen.gif" width="50%">
+</p>
 
 
-**📂 Directory Overview**
+# 📂 Directory Overview
 - **demo/** — Example scripts for generation and training
   - `gen_data/` — Input data generation utilities
   - `inital_data/` — Initial random structures (e.g., SiO₂)
@@ -34,7 +45,7 @@ This code is provided as a separate snapshot to ensure reproducibility of [our m
 - **src/** — Core source code and utilities
 
 
-## 🧪 Demo: Generating Amorphous SiO₂
+# 🧪 Demo: Generating Amorphous SiO₂
 
 A demo script is provided at
 ```~/demo/denoise_generate_demo.py```
@@ -44,7 +55,7 @@ Before running the demo, you may need to make minor adjustments (changing GPU ID
 
 The demo generating 300-atom a-SiO₂ took about 1.5 mins on NVIDIA RTX A6000.
 
-## ⚙️ Installation
+# ⚙️ Installation
 
 Common packages:
 - `numpy`
@@ -80,7 +91,7 @@ To uninstall:
 pip uninstall graphite
 ```
 
-## Citing
+# Citing
 
 If using this code, please cite the following papers:
 
@@ -102,3 +113,8 @@ If using this code, please cite the following papers:
   year={2024},
 }
 ```
+We thank the support from TRI for this project.
+
+<p align="center">
+  <img src="./media/logos/Toyota_Research_Institute_Logo_Square.png" width="50%">
+</p>
