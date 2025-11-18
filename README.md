@@ -28,57 +28,62 @@ This code is provided as a separate snapshot to ensure reproducibility of [our m
 
 
 # 📂 Directory Overview
-- **demo/** — Example scripts for generation and training
-  - `gen_data/` — Input data generation utilities
-  - `inital_data/` — Initial random structures (e.g., SiO₂)
-    - `random_sio2_size_300_data/`
-    - `random_sio2_size_3000_data/`
-  - `denoise_generate_demo.py` — Unconditional generation example
-  - `denoise_train_conditional.py` — Conditional training example
-  - `denoiser_train.py` — Unconditional training example
+- **demo/** — Example scripts for training and generating
+  - `demo_training/` 
+    - `simu_data/` — Simulated SiO<sub>2</sub> structures for training
+    - `denoiser_train_unconditional.py` -- unconditional training script
+    - `denoiser_train_conditional.py` -- conditional training script
 
-- **model/** — Pretrained diffusion models
-  - `gen-a-sio2-cond-v1.pt` — Conditional SiO₂ generator
-  - `gen-a-sio2-v1` — Unconditional SiO₂ generator
-  - `gen-cu50zr50-v1.pt` — Cu–Zr metallic glass generator
+  - `demo_training/` 
+    - `inital_data/` —- Initial random structures (e.g., SiO<sub>2</sub>)
+    - `gen_data/` -- Empty folder to store generated trajectory
+    - `denoise_generate_unconditional.py` -- unconditional generation script
+    - `denoise_generate_conditional.py`   -- conditional generation script
+
+  - **model/** — Pretrained diffusion models
+    - `gen-a-sio2-cond-v1.pt` — Conditional SiO<sub>2</sub> generator
+    - `gen-a-sio2-uncond-v1.pt` — Unconditional SiO<sub>2</sub> generator
+    - `gen-cu50zr50-v1.pt` — Cu–Zr metallic glass generator
 
 - **src/** — Core source code and utilities
 
 
-# 🧪 Demo: Generating Amorphous SiO₂
+# 🧪 Demo: Training and generating
 
-A demo script is provided at
-```~/demo/denoise_generate_demo.py```
-for generating amorphous SiO<sub>2</sub> structures using the trained  model.
+Demo scripts and related files are provided at ```~/demo/demo_training``` for training and ```~/demo/demo_generating``` for generating amorphous SiO<sub>2</sub> structures using the pre-trained model.
 
-Before running the demo, you may need to make minor adjustments (changing GPU ID or updating relevant file paths). Once configured, simply execute the script to reproduce the sample generation results.
+Before running the demo, you may need to make minor adjustments (changing GPU ID or updating relevant file paths). Once configured, simply execute the script by ```python DEMO.py``` to reproduce the our results.
 
-The demo generating 300-atom a-SiO<sub>2</sub> took about 1.5 mins on NVIDIA RTX A6000.
+The demo generating 300-atom a-SiO<sub>2</sub> took about 2 mins on NVIDIA RTX A6000.
+
+The unconditional model training takes about 20 hours and the conditional model training takes about 40 hours on NVIDIA RTX A6000
 
 # ⚙️ Installation
 
-Common packages:
-- `numpy`
-- `scikit-learn`
-- `pandas`
-- `ase`
+Create new environment
 
 ```bash
-pip install numpy scikit-learn pandas ase
+conda create -n dm2 python=3.10 -y
+conda activate dm2
 ```
+
 Install pytorch and other packages for graph data.
 ```bash
-pip install torch==2.5.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.5.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
-pip install torch_geometric
-
-pip install torch_scatter torch_cluster -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
+pip install torch-geometric
 ```
-
 Install e3nn with specific version.
 The latest version of e3nn may cause some error.
 ```bash
 pip install "e3nn==0.4.4"
+```
+
+Common packages:
+```bash
+pip install numpy==1.26.4
+
+pip install ase scipy pandas scikit-learn matplotlib tqdm
 ```
 
 Then, clone the repo and install ```dm2```
@@ -86,10 +91,7 @@ Then, clone the repo and install ```dm2```
 pip install -e /path/to/the/repo
 ```
 
-To uninstall:
-```bash
-pip uninstall graphite
-```
+Installation of different verison of packages may cause errors.
 
 # Citing
 

@@ -19,7 +19,6 @@ from graphite.nn.basis import bessel
 from graphite.nn.models.e3nn_nequip import NequIP_CoolingRateEmbed
 from graphite.transforms import RattleParticles, DownselectEdges
 from tqdm.notebook import trange
-import nvidia_smi
 import time
 
 # Suppress specific warnings
@@ -128,45 +127,45 @@ def set_gpu(gpu_id):
 # Main function
 def main():
     # === Main configuration parameter ===
-    NUM_SPECIES = 2         # important to check or casue error
-    gpu_id = 0              # adjustable
-    PIN_MEMORY  = True      # related to optimization for training, revert to False if you see any issues
-    NUM_WORKERS = 0         # related to optimization for training, revert to 1 if you see any issues
-    BATCH_SIZE  = 16        # adjust this so that each minibatch fits in the (GPU) memory
-    LARGE_CUTOFF = 10       # recommend
-    CUTOFF      = 5         # !VERY important to check or affect model performace
-    LEARN_RATE  = 2e-4      # adjustable
-    NUM_UPDATES = 30_000    # need to see convergence in loss plot (more or less)
-    train_ratio = 0.9       # adjustable
-    sigma_max_value = 0.75  # adjust added noise in noisying process (recommend 0.75)
+    NUM_SPECIES = 2         # important to check with your system or will casue error.
+    gpu_id = 1              # adjustable based on your device.
+    PIN_MEMORY  = True      # related to optimization for training, revert to False if you see any issues.
+    NUM_WORKERS = 0         # related to optimization for training, revert to 1 if you see any issues.
+    BATCH_SIZE  = 16        # adjust so that each minibatch fits in the (GPU) memory.
+    LARGE_CUTOFF = 10       # recommend.
+    CUTOFF      = 5         # recommend. May not the best value for every system and can affect model performace.
+    LEARN_RATE  = 2e-4      # adjustable.
+    NUM_UPDATES = 30000    # need to see convergence in loss plot (more or less).
+    train_ratio = 0.9       # adjustable.
+    sigma_max_value = 0.75  # adjust added noise in noisying process (recommend 0.75).
     path_save_loss_fig = './loss_figure.png'      # adjustable
     path_save_model = './model.pt'    # adjustable
 
     # ==== Load data ====
-    in_0 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample0.dat',format='lammps-data')
-    in_1 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample1.dat',format='lammps-data')
-    in_2 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample2.dat',format='lammps-data')
-    in_3 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample3.dat',format='lammps-data')
-    in_4 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample4.dat',format='lammps-data')
-    in_5 = ase.io.read('../a_sio2_simu/sio2_3000_glass_100k_sample5.dat',format='lammps-data')
-    in_6 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample0.dat',format='lammps-data')
-    in_7 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample1.dat',format='lammps-data')
-    in_8 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample2.dat',format='lammps-data')
-    in_9 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample3.dat',format='lammps-data')
-    in_10 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample4.dat',format='lammps-data')
-    in_11 = ase.io.read('../a_sio2_simu/sio2_3000_glass_10k_sample5.dat',format='lammps-data')
-    in_12 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample0.dat',format='lammps-data')
-    in_13 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample1.dat',format='lammps-data')
-    in_14 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample2.dat',format='lammps-data')
-    in_15 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample3.dat',format='lammps-data')
-    in_16 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample4.dat',format='lammps-data')
-    in_17 = ase.io.read('../a_sio2_simu/sio2_3000_glass_1k_sample5.dat',format='lammps-data')
-    in_18 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample0.dat',format='lammps-data')
-    in_19 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample1.dat',format='lammps-data')
-    in_20 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample2.dat',format='lammps-data')
-    in_21 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample3.dat',format='lammps-data')
-    in_22 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample4.dat',format='lammps-data')
-    in_23 = ase.io.read('../a_sio2_simu/sio2_3000_glass_0_1k_sample5.dat',format='lammps-data')
+    in_0 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample0.dat',format='lammps-data')
+    in_1 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample1.dat',format='lammps-data')
+    in_2 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample2.dat',format='lammps-data')
+    in_3 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample3.dat',format='lammps-data')
+    in_4 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample4.dat',format='lammps-data')
+    in_5 = ase.io.read('./simu_data/sio2_3000_glass_100k_sample5.dat',format='lammps-data')
+    in_6 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample0.dat',format='lammps-data')
+    in_7 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample1.dat',format='lammps-data')
+    in_8 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample2.dat',format='lammps-data')
+    in_9 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample3.dat',format='lammps-data')
+    in_10 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample4.dat',format='lammps-data')
+    in_11 = ase.io.read('./simu_data/sio2_3000_glass_10k_sample5.dat',format='lammps-data')
+    in_12 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample0.dat',format='lammps-data')
+    in_13 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample1.dat',format='lammps-data')
+    in_14 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample2.dat',format='lammps-data')
+    in_15 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample3.dat',format='lammps-data')
+    in_16 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample4.dat',format='lammps-data')
+    in_17 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample5.dat',format='lammps-data')
+    in_18 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample0.dat',format='lammps-data')
+    in_19 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample1.dat',format='lammps-data')
+    in_20 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample2.dat',format='lammps-data')
+    in_21 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample3.dat',format='lammps-data')
+    in_22 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample4.dat',format='lammps-data')
+    in_23 = ase.io.read('./simu_data/sio2_3000_glass_0_1k_sample5.dat',format='lammps-data')
     # Create a list of all structures
     ideal_atoms_list = [
         in_0, in_1, in_2, in_3, in_4, in_5,      
@@ -254,7 +253,7 @@ def main():
     print(f'Average time per epoch: {total_training_time/num_epochs:.2f} seconds')
 
     # Save model
-    torch.save(model, '../models_large/a-sio2-denoiser-v47.pt')
+    torch.save(model, path_save_model)
 
     # Plot results
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 3))
@@ -269,7 +268,7 @@ def main():
     ax2.set_xlabel('Epochs')
     ax2.legend()
     plt.show()
-    plt.savefig('results/training_loss_sio2_denoiser_v47.png', bbox_inches='tight', dpi=300)
+    plt.savefig(path_save_loss_fig, bbox_inches='tight', dpi=300)
     
     
 

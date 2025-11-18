@@ -19,7 +19,6 @@ from graphite.nn.basis import bessel
 from graphite.nn.models.e3nn_nequip import NequIP
 from graphite.transforms import RattleParticles, DownselectEdges
 from tqdm.notebook import trange
-import nvidia_smi
 import time
 
 # Suppress specific warnings
@@ -120,25 +119,25 @@ def set_gpu(gpu_id):
 # Main function
 def main():
     # === Main configuration parameter ===
-    NUM_SPECIES = 2         # important to check or casue error
-    gpu_id = 0              # adjustable
-    PIN_MEMORY  = True      # related to optimization for training, revert to False if you see any issues
-    NUM_WORKERS = 0         # related to optimization for training, revert to 1 if you see any issues
-    BATCH_SIZE  = 16        # adjust this so that each minibatch fits in the (GPU) memory
-    LARGE_CUTOFF = 10       # recommend
-    CUTOFF      = 5         # !VERY important to check or affect model performace
-    LEARN_RATE  = 2e-4      # adjustable
-    NUM_UPDATES = 30_000    # need to see convergence in loss plot (more or less)
-    train_ratio = 0.9       # adjustable
-    sigma_max_value = 0.75  # adjust added noise in noisying process (recommend 0.75)
-    path_save_loss_fig = './loss_figure.png'      # adjustable
-    path_save_model = './model.pt'    # adjustable
+    NUM_SPECIES = 2         # important to check with your system or will casue error.
+    gpu_id = 0              # adjustable based on your device.
+    PIN_MEMORY  = True      # related to optimization for training, revert to False if you see any issues.
+    NUM_WORKERS = 0         # related to optimization for training, revert to 1 if you see any issues.
+    BATCH_SIZE  = 16        # adjust so that each minibatch fits in the (GPU) memory.
+    LARGE_CUTOFF = 10       # recommend.
+    CUTOFF      = 5         # recommend. May not the best value for every system and can affect model performace.
+    LEARN_RATE  = 2e-4      # adjustable.
+    NUM_UPDATES = 30_000    # need to see convergence in loss plot (more or less).
+    train_ratio = 0.9       # adjustable.
+    sigma_max_value = 0.75  # adjust added noise in noisying process (recommend 0.75).
+    path_save_loss_fig = './loss_figure.png'        # adjustable
+    path_save_model = './model.pt'                  # adjustable
     # ====================
 
     # === Load data (add more if needed) ===
-    file_0 = ase.io.read('FILE-1-PATH.dat',format='lammps-data')
-    file_1 = ase.io.read('FILE-1-PATH.dat',format='lammps-data')
-    file_2 = ase.io.read('FILE-1-PATH.dat',format='lammps-data')
+    file_0 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample0.dat',format='lammps-data')
+    file_1 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample1.dat',format='lammps-data')
+    file_2 = ase.io.read('./simu_data/sio2_3000_glass_1k_sample2.dat',format='lammps-data')
     ideal_atoms_list = [file_0, file_1, file_2]
     # ====================
 
@@ -207,6 +206,8 @@ def main():
     print(f'Total training time: {total_time:.2f} seconds ({total_time/3600:.2f} hours)')
     print(f'Average time per epoch: {total_training_time/num_epochs:.2f} seconds')
 
+    # Save model
+    torch.save(model, path_save_model)
 
     # Plot results
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 3))
@@ -222,9 +223,6 @@ def main():
     ax2.legend()
     plt.show()
     plt.savefig(path_save_loss_fig, bbox_inches='tight', dpi=300)
-    
-    # Save model
-    torch.save(model, path_save_model)
 
 if __name__ == '__main__':
     main()
