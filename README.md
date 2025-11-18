@@ -34,7 +34,7 @@ This code is provided as a separate snapshot to ensure reproducibility of [our m
     - `denoiser_train_unconditional.py` -- unconditional training script
     - `denoiser_train_conditional.py` -- conditional training script
 
-  - `demo_training/` 
+  - `demo_generating/` 
     - `inital_data/` —- Initial random structures (e.g., SiO<sub>2</sub>)
     - `gen_data/` -- Empty folder to store generated trajectory
     - `denoise_generate_unconditional.py` -- unconditional generation script
